@@ -1,0 +1,43 @@
+<div id='event' class='row'>
+	<div class='col-sm-6'>
+		<h1 class='header'><%= @event.name %></h1>
+		<p><span>Host:</span> <%= @event.user.first_name %></p>
+		<p><span>Date:</span> <%= @event.date.strftime("%B %d %Y") %></p>
+		<p><span>Location:</span> <%= @event.location %></p>
+		<p><span>Attendees:</span> <%= @joins.count %></p>
+		<table class="table table-striped">
+		  	<tr>
+		  		<td>Name</td>
+		  		<td>Location</td>
+		  		<td>State</td>
+		  	</tr>
+		  	<% @joins.each do |join| %>
+		  	<tr>
+		  		<td><%= join.user.first_name %></td>
+		  		<td><%= join.user.location %></td>
+		  		<td><%= join.user.state %></td>
+		  	</tr>
+		  	<% end %>
+		 </table>
+	</div>
+	<div class='col-sm-6 comments'>
+		<h3>Discussion Wall</h3>
+		<div class="panel panel-default">
+		  <div id='comment_wall' class="panel-body">
+		    <% @comments.each do |comment| %>
+		    	<p><%= "#{comment.user.first_name} says: #{comment.comment}" %></p>
+		    <% end %>
+		  </div>
+		</div>
+		<form action='/events/<%= @event.id %>/comment' method='post'>
+	      <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+		  <div class="form-group col-sm-12">
+		    <label for="comment">Comment</label>
+		    <input type="text" class="form-control" id="comment" name='comment'>
+		  </div>
+		  <button type="submit" value="add_comment" class="btn btn-default pull-right">Add Comment</button>
+		</form>
+	</div>
+</div>
+
+

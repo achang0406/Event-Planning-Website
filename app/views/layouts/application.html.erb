@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BlackBeltReview2</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" type="text/css" href="https://bootswatch.com/journal/bootstrap.min.css">
+</head>
+<body>
+<div class='row'>
+	<div class='col-sm-12'>
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="/events">
+		      	<p>@Events</p>
+		      </a>
+		    </div>
+		    <% if current_user %>
+			    <a href="/users/logout"><button type="button" class="btn btn-default navbar-btn pull-right">Logout</button></a>
+			    <a href="/users/<%= session[:user_id] %>/edit"><button type="button" class="btn btn-default navbar-btn pull-right">Edit Your Profile</button></a>
+			    <a href="/users"><button type="button" class="btn btn-default navbar-btn pull-right">Events</button></a>
+		    <% end %>
+		  </div>
+		</nav>
+	</div>
+</div>
+<div class='container-fluid'>
+	<%= yield %>
+	<div class='row'>
+	<% if flash[:errors] %>
+		<% flash[:errors].each do |error| %>
+			<div class='col-sm-12'>
+				<p><%= error %></p>
+			</div>
+		<% end %>
+	<% end %>
+	</div>
+</div>
+
+</body>
+</html>
