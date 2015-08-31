@@ -1,9 +1,0 @@
-This is an event planning networking website to bring your community closer.
-
-Technology includes:
-- Ruby on Rails
-- Bootstrap
-- full login/validation feature
-- chats
-
-![screenshot1](/screenshots/Login.png?raw=true)
